@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
    private Button falseButton , trueButton;
-   private ImageButton nextButton;
+   private ImageButton nextButton, prevButton;
    private TextView questionTextView;
    private int currentQuestionIndex = 0;
     private Question[] question = new Question[]{
@@ -35,11 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         trueButton = findViewById(R.id.true_button);
 
         nextButton = findViewById(R.id.next_button);
+        prevButton = findViewById(R.id.prev_button);
 
         falseButton.setOnClickListener(this);
         trueButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
-
+        prevButton.setOnClickListener(this);
 
     }
 
@@ -55,6 +56,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.next_button:
                 currentQuestionIndex = (currentQuestionIndex+1) % question.length;
                 updateQuestion();
+                break;
+            case R.id.prev_button:
+                if(currentQuestionIndex > 0){
+                currentQuestionIndex = (currentQuestionIndex-1) % question.length;
+                updateQuestion();
+                }else {
+                    currentQuestionIndex = question.length;
+                }
                 break;
 
         }
